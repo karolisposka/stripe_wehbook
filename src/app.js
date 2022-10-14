@@ -1,6 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch')
-const { server_url, stripeEndpointSecret} = require('./config')
+const { server_url, stripeEndpointSecret, port} = require('./config')
 const stripe = require('stripe')('sk_test_51Lj8yFFPSbztWufZlFEDoK9gX7PnXiKsQHJVoKmUFk3xnqbH4bskMV0fLZY1PwilkS2lcSx5mC87LiqFhUNOHXk500rCHeQmEL');
 const endpointSecret = stripeEndpointSecret;
 const app = express();
