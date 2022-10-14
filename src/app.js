@@ -1,6 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch')
-const { stripeEndpointSecret, port} = require('./config')
+const { server_url, stripeEndpointSecret} = require('./config')
 const stripe = require('stripe')('sk_test_51Lj8yFFPSbztWufZlFEDoK9gX7PnXiKsQHJVoKmUFk3xnqbH4bskMV0fLZY1PwilkS2lcSx5mC87LiqFhUNOHXk500rCHeQmEL');
 const endpointSecret = stripeEndpointSecret;
 const app = express();
@@ -13,7 +13,7 @@ app.post('/webhook', express.raw({type: 'application/json'}), async  (request, r
   try {
     event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
     if(event.type === 'checkout.session.completed'){
-        const response = await fetch('http://192.168.0.14:8080/v1/orders/verify', {
+        const response = await fetch(`${server_url}/v1/orders/verify`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
